@@ -1,38 +1,43 @@
 openapi-generator-maven-plugin
 ============================
 
-A Maven plugin to support the OpenAPI generator project
+* := Maven plugin to support the OpenAPI generator project
+  * 2 plugin goals -- `mvn help:describe -Dplugin=org.openapitools:openapi-generator-maven-plugin` --
+    * `generate`
+      * -- bound to -- `generate-sources` build phase
+        * `mvn help:describe -Dplugin=org.openapitools:openapi-generator-maven-plugin -Dgoal=generate -Ddetail`
+    * `help`
+      * existing for every plugin
 
-Usage
+
+How to use?
 ============================
-
-Add to your `build->plugins` section (default phase is `generate-sources` phase)
-```xml
-<plugin>
-    <groupId>org.openapitools</groupId>
-    <artifactId>openapi-generator-maven-plugin</artifactId>
-    <!-- RELEASE_VERSION -->
-    <version>7.2.0</version>
-    <!-- /RELEASE_VERSION -->
-    <executions>
-        <execution>
-            <goals>
-                <goal>generate</goal>
-            </goals>
-            <configuration>
-                <inputSpec>${project.basedir}/src/main/resources/api.yaml</inputSpec>
-                <generatorName>java</generatorName>
-                <configOptions>
-                   <sourceFolder>src/gen/java/main</sourceFolder>
-                </configOptions>
-            </configuration>
-        </execution>
-    </executions>
-</plugin>
-```
-
-Followed by:
-
+* Add to your `build->plugins` section
+    ```xml
+    <plugin>
+        <groupId>org.openapitools</groupId>
+        <artifactId>openapi-generator-maven-plugin</artifactId>
+        <!-- RELEASE_VERSION -->
+        <version>7.2.0</version>
+        <!-- /RELEASE_VERSION -->
+        <executions>
+            <execution>
+                <goals>
+                    <goal>generate</goal>
+                </goals>
+                <!--  <phase>generate-sources</phase>      Default one -->
+                <configuration>
+                    <inputSpec>${project.basedir}/src/main/resources/api.yaml</inputSpec>
+                    <generatorName>java</generatorName>
+                    <configOptions>
+                       <sourceFolder>src/gen/java/main</sourceFolder>
+                    </configOptions>
+                </configuration>
+            </execution>
+        </executions>
+    </plugin>
+    ```
+* Run
 ```
 mvn clean compile
 ```
