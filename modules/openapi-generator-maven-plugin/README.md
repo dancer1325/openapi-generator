@@ -44,13 +44,13 @@ mvn clean compile
 
 ### General Configuration parameters
 
-:bulb: These **general** configurations should be in the same level
+* 👁️ALL are in the same level `execution.configuration` 👁️
 
 | Option | Property | Description |
 |--------|----------|-------------|
 | `verbose` |  `openapi.generator.maven.plugin.verbose` | verbose mode (`false` by default)
-| `inputSpec` |  `openapi.generator.maven.plugin.inputSpec` | OpenAPI Spec file path
-| `inputSpecRootDirectory` |  `openapi.generator.maven.plugin.inputSpecRootDirectory` | Local root folder with spec file(s)
+| `inputSpec` |  `openapi.generator.maven.plugin.inputSpec` | OpenAPI Spec file path - ⚠️ MANDATORY ⚠️ -
+| `inputSpecRootDirectory` |  `openapi.generator.maven.plugin.inputSpecRootDirectory` | Local root folder with OpenAPI spec file(s)
 | `mergedFileName` |  `openapi.generator.maven.plugin.mergedFileName` | Name of the file that will contain all merged specs
 | `language` |  `openapi.generator.maven.plugin.language` | target generation language (deprecated, replaced by `generatorName` as values here don't represent only 'language' any longer)
 | `generatorName` |  `openapi.generator.maven.plugin.generatorName` | target generator name
@@ -224,9 +224,6 @@ Specifying a custom generator is a bit different. It doesn't support the classpa
 ```
 
 ### Sample configuration
-
-Please see [an example configuration](examples) for using the plugin. To run these examples, explicitly pass the file to maven. Example:
-
-```bash
-mvn -f non-java.xml compile
-```
+* Check [examples](examples)
+* If you want to run specific file `mvn -f pomFileName.xml compile`
+  * _Example:_ `mvn -f non-java.xml compile` 
