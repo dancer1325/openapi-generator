@@ -14,6 +14,7 @@
     <maven.compiler.target>11</maven.compiler.target>
   </properties>
 
+  <!-- Attempt to fix the packages NOT found -->
   <dependencies>
     <dependency>
       <groupId>javax.annotation</groupId>
@@ -56,6 +57,14 @@
             </configuration>
           </execution>
         </executions>
+        <!-- Attempt to fix the packages NOT found -->
+        <dependencies>
+          <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.9.1</version>
+          </dependency>
+        </dependencies>
       </plugin>
     </plugins>
   </build>
