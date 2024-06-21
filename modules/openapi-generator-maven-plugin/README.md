@@ -88,7 +88,7 @@ mvn clean compile
 | `strictSpec` |  `openapi.generator.maven.plugin.strictSpec` | Whether or not to treat an input document strictly against the spec. 'MUST' and 'SHALL' wording in OpenAPI spec is strictly adhered to. e.g. when false, no fixes will be applied to documents which pass validation but don't follow the spec.
 | `openapiNormalizer` |  `openapi.generator.maven.plugin.openapiNormalizer` | specifies the rules to be enabled in OpenAPI normalizer in the form of RULE_1=true,RULE_2=original.
 | `generateAliasAsModel` |  `openapi.generator.maven.plugin.generateAliasAsModel` | generate alias (array, map) as model
-| `configOptions` |  N/A | a **map** of generator-specific parameters. To show a full list of generator-specified parameters (options), please use `configHelp` (explained below)
+| `configOptions` |  N/A | := **map** of generator-specific parameters. To show a full list of generator-specified parameters (options), please use `configHelp` (explained below)
 | `instantiationTypes` |  `openapi.generator.maven.plugin.instantiationTypes` | sets instantiation type mappings in the format of type=instantiatedType,type=instantiatedType. For example (in Java): `array=ArrayList,map=HashMap`. In other words array types will get instantiated as ArrayList in generated code. You can also have multiple occurrences of this option
 | `importMappings` |  `openapi.generator.maven.plugin.importMappings` | specifies mappings between a given class and the import that should be used for that class in the format of type=import,type=import. You can also have multiple occurrences of this option
 | `typeMappings` |  `openapi.generator.maven.plugin.typeMappings` | sets mappings between OpenAPI spec types and generated code types in the format of OpenAPIType=generatedType,OpenAPIType=generatedType. For example: `array=List,map=Map,string=String`. You can also have multiple occurrences of this option. To map a specified format, use type+format, e.g. string+password=EncryptedString will map `type: string, format: password` to `EncryptedString`.
@@ -122,39 +122,38 @@ mvn clean compile
 | `globalProperties` | N/A | A **map** of items conceptually similar to "environment variables" or "system properties". These are available to all aspects of the generation flow. See [Global Properties](https://openapi-generator.tech/docs/globals/) for list of available properties.
 | `configHelp` |  `codegen.configHelp` | dumps the configuration help for the specified library (generates no sources)
 
-### Configuring **map** structures
+* `mvn help:describe -Dplugin=org.openapitools:openapi-generator-maven-plugin:7.2.0 -Ddetail`
+  * 👁display ALSO the available parameters, with this table 👁
 
-For configuration options documented as a **map** above, the key/value options may be configured as free-form nodes under these options. This takes the format:
+### How to configure `configuration` parameters / are **map** structures?
+* Check the `map`S defined in the previous table
+* Syntax
+    ```xml
+    <configuration>
+        <parameterOfPreviosConfiguration>
+           <key>value</key>
+        </parameterOfPreviosConfiguration>
+    </configuration>
+    ```
+  * `key` & `value` are any values / you'd like to provide
+  * _Example:_ Configure `globalProperties` / match `--global-property models=User:Pet`
+  
+    ```xml
+    <configuration>
+        <globalProperties>
+           <models>User:Pet</models>
+        </globalProperties>
+    </configuration>
+    ```
+* These `mapEntries` -- may overwrite or conflict with -- other options / available to the maven plugin
+  * _Example:_ above `globalProperties` example ==
 
-```xml
-<configuration>
-    <option>
-       <key>value</key>
-    </option>
-</configuration>
-```
-
-This configuration node location will match that of the plugin configuration examples at the top of this document and in the section below. Here, `option` matches in option name in the first column in the table from the previous section.
-The `key` and `value` text are any values you'd like to provide for that option. As an example, to configure `globalProperties` to match the `--global-property models=User:Pet` example from our [Selective Generation](https://openapi-generator.tech/docs/customization#selective-generation) documentation, see below.
-
-```xml
-<configuration>
-    <globalProperties>
-       <models>User:Pet</models>
-    </globalProperties>
-</configuration>
-```
-
-Notice that some of these environment variable options may overwrite or conflict with other options available to the maven plugin. For example, the above `globalProperties` example is equivalent to the following:
-
-```xml
-<configuration>
-    <generateModels>true</generateModels>
-    <modelsToGenerate>User:Pet</modelsToGenerate>
-</configuration>
-```
-
-The difference here is that you may define `generateModels` and `modelsToGenerate` as properties, while `globalProperties` may only be configured as a configuration node.
+    ```xml
+    <configuration>
+        <generateModels>true</generateModels>
+        <modelsToGenerate>User:Pet</modelsToGenerate>
+    </configuration>
+    ```
 
 ### Type and import mappings
 
