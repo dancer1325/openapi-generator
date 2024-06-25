@@ -120,13 +120,11 @@ mvn clean compile
 | `dryRun` | `openapi.generator.maven.plugin.dryRun` | Defines whether the generator should run in dry-run mode. In dry-run mode no files are written and a summary about file states is output ( `false` by default).
 | `environmentVariables` | N/A | deprecated. Use globalProperties instead.
 | `globalProperties` | N/A | A **map** of items conceptually similar to "environment variables" or "system properties". These are available to all aspects of the generation flow. See [Global Properties](https://openapi-generator.tech/docs/globals/) for list of available properties.
-| `configHelp` |  `codegen.configHelp` | - mirror the configuration help for the specified library <br> - NO generate sources
+| `configHelp` |  `codegen.configHelp` | - mirror the configuration help for the specified library <br> - NO generate sources <br> - `openapi-generator config-help -g generatorNameUsed`
 
 * `mvn help:describe -Dplugin=org.openapitools:openapi-generator-maven-plugin:7.2.0 -Ddetail`
   * 👁display ALSO the available parameters, with this table 👁
 * Check 'examples/'
-  * using `configHelp`
-    * TODO:
   * TODO:
 
 ### How to configure `configuration` parameters / are **map** structures?
